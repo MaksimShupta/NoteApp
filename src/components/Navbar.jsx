@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-
+import addIcon from "../images/addIcon.svg";
 const Navbar = () => {
   //TODO: add logic
   return (
@@ -26,6 +26,12 @@ const Navbar = () => {
               </button>
             </div>
           </form>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-white text-gray-800 font-semibold rounded-lg hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          >
+            <img src={addIcon} alt={"New Note"} className="w-6 h=6" />
+          </button>
         </div>
       </nav>
     </>
