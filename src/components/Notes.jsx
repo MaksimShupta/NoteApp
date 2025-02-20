@@ -1,10 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import NoteCard from "../components/NoteCard";
 import { useNavigate } from "react-router";
+import { CategoryContext } from "../App";
 
 const Notes = () => {
   const [notes, setNotes] = useState({});
   const navigate = useNavigate();
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const { categories } = useContext(CategoryContext);
+  const [filteredNotes, setFilteredNotes] = useState([]);
+  const cats = Object.keys(categories || {}).map((key) => ({
+    value: key,
+    label: key.toUpperCase(),
+    icon: <img src={categories[key]} alt={key} className="w-6 h-6" />,
+  }));
+
   const getAllItemsFromLocalStorage = () => {
     const items = {};
     for (let i = 0; i < localStorage.length; i++) {
@@ -18,6 +28,7 @@ const Notes = () => {
     }
     return items;
   };
+  console.log("Get all items from LS:", getAllItemsFromLocalStorage());
 
   //const allItems = getAllItemsFromLocalStorage();
   useEffect(() => {
@@ -29,6 +40,17 @@ const Notes = () => {
     "Category:",
     Object.values(notes).map((e) => e.category)
   );
+
+  useEffect(() => {
+    if (categoryFilter) {
+      const filtered = Object.values(notes).filter(
+        (note) => note.category.toLowerCase() === categoryFilter.toLowerCase()
+      );
+      setFilteredNotes(filtered);
+    } else {
+      setFilteredNotes(Object.values(notes));
+    }
+  }, [categoryFilter, notes]);
 
   const onDelete = (key) => {
     console.log("Delete form LS:", key);
@@ -48,22 +70,40 @@ const Notes = () => {
   };
 
   return (
-    <div
-      id="items-list"
-      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-4"
-    >
-      {Object.values(notes).map((item) => (
-        <NoteCard
-          //key={item.id} // React key remains for rendering list
-          itemKey={item.id} // Pass the key explicitly as a prop to NoteCard
-          title={item.title}
-          date={item.date}
-          category={item.category}
-          description={item.description}
-          onEdit={() => onEdit(item.id)}
-          onDelete={() => onDelete(item.id)}
-        />
-      ))}
+    <div>
+      {/* Wrapper to ensure full width */}
+      <div className="flex justify-center w-full">
+        {/* Centered button container */}
+        <div className="flex items-center justify-center gap-6 mb-8 flex-wrap">
+          {cats.map((cat) => (
+            <button
+              key={cat.value}
+              onClick={() => setCategoryFilter(cat.label)}
+              className="flex items-center bg-white-500 text-white px-4 py-2 rounded-lg hover:bg-white transition"
+            >
+              {cat.icon}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Notes List */}
+      <div
+        id="items-list"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-4"
+      >
+        {Object.values(filteredNotes).map((item) => (
+          <NoteCard
+            itemKey={item.id}
+            title={item.title}
+            date={item.date}
+            category={item.category}
+            description={item.description}
+            onEdit={() => onEdit(item.id)}
+            onDelete={() => onDelete(item.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 };

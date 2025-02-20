@@ -13,7 +13,11 @@ const Navbar = () => {
     <>
       <nav className="bg-gray-800 text-white shadow-md">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link to="/" className="text-lg font-bold">
+          <Link
+            to="/"
+            onClick={() => setCategoryFilter("")}
+            className="text-lg font-bold"
+          >
             Home
           </Link>
           <form className="hidden md:flex flex-grow justify-center mx-8">
