@@ -3,7 +3,15 @@ import reactIcon from "../images/reactIcon.svg";
 import javascriptIcon from "../images/javascriptIcon.svg";
 import sqlIcon from "../images/sqlIcon.svg";
 
-const NoteCard = ({ title, date, category, description }) => {
+const NoteCard = ({
+  itemKey,
+  title,
+  date,
+  category,
+  description,
+  onEdit,
+  onDelete,
+}) => {
   const categoryImg = {
     html: htmlIcon,
     react: reactIcon,
@@ -11,10 +19,10 @@ const NoteCard = ({ title, date, category, description }) => {
     sql: sqlIcon,
   };
 
-  const categoryImage = categoryImg[category.toLowerCase()] || "";
-
-  const onDelete = () => {};
-  const onEdit = () => {};
+  const categoryImage = categoryImg[category?.toLowerCase()] || "";
+  console.log("Note card:", itemKey);
+  //const onDelete = () => {};
+  //const onEdit = () => {};
 
   return (
     <div className="bg-[#282828] text-[#F5F5F5] rounded-xl p-6 border flex flex-col gap-8">
@@ -34,13 +42,16 @@ const NoteCard = ({ title, date, category, description }) => {
       <div className="flex gap-4 mt-2">
         <button
           className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 w-full md:w-auto"
-          onClick={() => onEdit()}
+          onClick={() => onEdit(itemKey)}
         >
           Edit
         </button>
         <button
           className="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 w-full md:w-auto"
-          onClick={() => onDelete()}
+          onClick={() => {
+            console.log("Deleting item with key:", itemKey);
+            onDelete(itemKey);
+          }}
         >
           Remove
         </button>
