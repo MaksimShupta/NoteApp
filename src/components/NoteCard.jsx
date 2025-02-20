@@ -50,7 +50,8 @@ const NoteCard = ({
           className="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 w-full md:w-auto"
           onClick={() => {
             console.log("Deleting item with key:", itemKey);
-            onDelete(itemKey);
+            if (itemKey) onDelete(itemKey);
+            else console.error("itemKey is undefined when calling onDelete");
           }}
         >
           Remove

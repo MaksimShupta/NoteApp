@@ -9,7 +9,7 @@ const Notes = () => {
       const key = localStorage.key(i);
       try {
         const value = JSON.parse(localStorage.getItem(key)); // Try parsing JSON
-        if (value) items[key] = value;
+        if (value) items[key] = { ...value, id: key };
       } catch (error) {
         console.error(`Error parsing item ${key}:`, error);
       }
@@ -48,7 +48,7 @@ const Notes = () => {
     >
       {Object.values(notes).map((item) => (
         <NoteCard
-          key={item.id} // React key remains for rendering list
+          //key={item.id} // React key remains for rendering list
           itemKey={item.id} // Pass the key explicitly as a prop to NoteCard
           title={item.title}
           date={item.date}
