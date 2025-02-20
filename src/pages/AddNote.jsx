@@ -1,10 +1,6 @@
 import Select from "react-select";
 import { CategoryContext } from "../App";
 import { useContext, useState } from "react";
-import htmlIcon from "../images/htmlIcon.svg";
-import reactIcon from "../images/reactIcon.svg";
-import javascriptIcon from "../images/javascriptIcon.svg";
-import sqlIcon from "../images/sqlIcon.svg";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router";
 
@@ -13,31 +9,13 @@ const AddNote = () => {
   const navigate = useNavigate();
   console.log("AddNotePage:", categories);
   //["HTML", "JavaScript", "React", "SQL"];
-  const categoryImg = {
-    html: htmlIcon,
-    react: reactIcon,
-    javascript: javascriptIcon,
-    sql: sqlIcon,
-  };
 
-  const cats = [
-    {
-      value: categories[0],
-      label: categories[0],
-      icon: <img src={htmlIcon} />,
-    },
-    {
-      value: categories[1],
-      label: categories[1],
-      icon: <img src={javascriptIcon} />,
-    },
-    {
-      value: categories[2],
-      label: categories[2],
-      icon: <img src={reactIcon} />,
-    },
-    { value: categories[3], label: categories[3], icon: <img src={sqlIcon} /> },
-  ];
+  const cats = Object.keys(categories).map((key) => ({
+    value: key,
+    label: key.toUpperCase(),
+    icon: <img src={categories[key]} alt={key} className="w-6 h-6" />,
+  }));
+
   const [form, setForm] = useState({
     title: "",
     date: "",
@@ -99,10 +77,11 @@ const AddNote = () => {
               getOptionLabel={(e) => (
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
-                    src={categoryImg[e.label.toLowerCase()]}
-                    className="w-6 h-6"
+                    src={categories[e.value]}
+                    className="w-6 h-6 mr-2"
+                    alt={e.label}
                   />
-                  &nbsp;{e.label}
+                  {e.label}
                 </div>
               )}
               onChange={handleCategoryChange}

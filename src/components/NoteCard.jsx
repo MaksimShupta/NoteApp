@@ -1,7 +1,5 @@
-import htmlIcon from "../images/htmlIcon.svg";
-import reactIcon from "../images/reactIcon.svg";
-import javascriptIcon from "../images/javascriptIcon.svg";
-import sqlIcon from "../images/sqlIcon.svg";
+import { CategoryContext } from "../App";
+import { useContext } from "react";
 
 const NoteCard = ({
   itemKey,
@@ -12,14 +10,9 @@ const NoteCard = ({
   onEdit,
   onDelete,
 }) => {
-  const categoryImg = {
-    html: htmlIcon,
-    react: reactIcon,
-    javascript: javascriptIcon,
-    sql: sqlIcon,
-  };
+  const { categories } = useContext(CategoryContext);
 
-  const categoryImage = categoryImg[category?.toLowerCase()] || "";
+  const categoryImage = categories[category?.toLowerCase()] || "";
   console.log("Note card:", itemKey);
   //const onDelete = () => {};
   //const onEdit = () => {};

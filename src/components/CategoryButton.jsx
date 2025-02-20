@@ -1,30 +1,25 @@
 import { useNavigate } from "react-router";
-import htmlIcon from "../images/htmlIcon.svg";
-import reactIcon from "../images/reactIcon.svg";
-import javascriptIcon from "../images/javascriptIcon.svg";
-import sqlIcon from "../images/sqlIcon.svg";
+import { useContext, useState } from "react";
+import { CategoryContext } from "../App";
 
-const categoryImg = {
-  html: htmlIcon,
-  react: reactIcon,
-  javascript: javascriptIcon,
-  sql: sqlIcon,
-};
-
-const CategoryButton = ({ cat, img }) => {
+const CategoryButton = ({ cat }) => {
   const navigate = useNavigate();
+
+  const { categories } = useContext(CategoryContext);
+  console.log("Category button:", categories);
+  console.log("cat:", cat);
 
   const handleClick = () => {
     navigate(`/category/${cat}`); // Navigate to category page
   };
-
+  console.log("icon", categories[cat]);
   return (
     <button
       onClick={handleClick}
       className="bg-white-500 text-white px-4 py-2 rounded-lg hover:bg-white transition"
     >
       <img
-        src={categoryImg[cat.toLowerCase()]}
+        src={categories[cat.toLowerCase()]}
         // alt={cat.toUpperCase()}
         className="w-6 h-6"
       />
