@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import NoteCard from "../components/NoteCard";
+import { useNavigate } from "react-router";
 
 const Notes = () => {
   const [notes, setNotes] = useState({});
+  const navigate = useNavigate();
   const getAllItemsFromLocalStorage = () => {
     const items = {};
     for (let i = 0; i < localStorage.length; i++) {
@@ -39,7 +41,11 @@ const Notes = () => {
       return updatedNotes; // Update state
     });
   };
-  const onEdit = () => {};
+  const onEdit = (key) => {
+    console.log("Edit:", key);
+    if (!key) return;
+    navigate(`/edit/${key}`);
+  };
 
   return (
     <div

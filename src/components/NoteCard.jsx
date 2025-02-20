@@ -14,8 +14,6 @@ const NoteCard = ({
 
   const categoryImage = categories[category?.toLowerCase()] || "";
   console.log("Note card:", itemKey);
-  //const onDelete = () => {};
-  //const onEdit = () => {};
 
   return (
     <div className="bg-[#282828] text-[#F5F5F5] rounded-xl p-6 border flex flex-col gap-8">

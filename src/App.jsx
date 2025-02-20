@@ -8,6 +8,7 @@ import htmlIcon from "./images/htmlIcon.svg";
 import reactIcon from "./images/reactIcon.svg";
 import javascriptIcon from "./images/javascriptIcon.svg";
 import sqlIcon from "./images/sqlIcon.svg";
+import EditNote from "./pages/EditNote";
 
 const CategoryContext = createContext();
 export const CategoryProvider = ({ children }) => {
@@ -33,6 +34,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="category/:category" element={<Category />} />
           <Route path="add-note" element={<AddNote />} />
+          <Route path="/edit/:id" element={<EditNote />} />
         </Routes>
       </CategoryProvider>
     </BrowserRouter>
