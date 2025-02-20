@@ -26,7 +26,7 @@ const CategoryButton = ({ cat, img }) => {
       <img
         src={categoryImg[cat.toLowerCase()]}
         // alt={cat.toUpperCase()}
-        className="w-6 h=6"
+        className="w-6 h-6"
       />
     </button>
   );

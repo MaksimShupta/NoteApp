@@ -4,7 +4,7 @@ import CategoryButton from "../components/CategoryButton";
 const Categories = () => {
   //const [items, setItems] = useState([]);
   //localStorage.getItem();
-  const categories = ["HTML", , "JavaScript", "React", "SQL"];
+  const categories = ["HTML", "JavaScript", "React", "SQL"];
   return (
     <div
       id="cat-list"
