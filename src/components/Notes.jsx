@@ -56,6 +56,9 @@ const Notes = ({ searchQuery }) => {
         note.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
+    //if (searchDate) {
+    //  filtered = filtered.filter((note) => note.date.startsWith(searchDate));
+    //}
 
     setFilteredNotes(filtered);
   }, [categoryFilter, searchQuery, notes]);

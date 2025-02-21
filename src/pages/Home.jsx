@@ -3,8 +3,10 @@ import Notes from "../components/Notes";
 import { useState } from "react";
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  //const [searchDate, setSearchDate] = useState("");
   const handleSearch = (query) => {
     setSearchQuery(query);
+    //setSearchDate(date);
     console.log("Searching for:", query); // Debugging
   };
 

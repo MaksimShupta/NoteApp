@@ -6,6 +6,7 @@ const Navbar = ({ onSearch }) => {
   //TODO: add logic
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  //const [searchDate, setSearchDate] = useState("");
 
   const handleAddNote = (e) => {
     e.preventDefault();
