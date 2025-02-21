@@ -3,12 +3,14 @@ import NoteCard from "../components/NoteCard";
 import { useNavigate } from "react-router";
 import { CategoryContext } from "../App";
 
-const Notes = () => {
+const Notes = ({ searchQuery }) => {
   const [notes, setNotes] = useState({});
   const navigate = useNavigate();
   const [categoryFilter, setCategoryFilter] = useState("");
   const { categories } = useContext(CategoryContext);
   const [filteredNotes, setFilteredNotes] = useState([]);
+  //const [searchQuery, setSearchQuery] = useState("");
+
   const cats = Object.keys(categories || {}).map((key) => ({
     value: key,
     label: key.toUpperCase(),
@@ -42,15 +44,21 @@ const Notes = () => {
   );
 
   useEffect(() => {
+    let filtered = Object.values(notes);
+
     if (categoryFilter) {
-      const filtered = Object.values(notes).filter(
+      filtered = filtered.filter(
         (note) => note.category.toLowerCase() === categoryFilter.toLowerCase()
       );
-      setFilteredNotes(filtered);
-    } else {
-      setFilteredNotes(Object.values(notes));
     }
-  }, [categoryFilter, notes]);
+    if (searchQuery) {
+      filtered = filtered.filter((note) =>
+        note.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    setFilteredNotes(filtered);
+  }, [categoryFilter, searchQuery, notes]);
 
   const onDelete = (key) => {
     console.log("Delete form LS:", key);

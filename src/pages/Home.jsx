@@ -1,12 +1,18 @@
 import Navbar from "../components/Navbar";
 import Notes from "../components/Notes";
-
+import { useState } from "react";
 const Home = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    console.log("Searching for:", query); // Debugging
+  };
+
   return (
     <div className="flex flex-col bg-gray-900 text-white min-h-screen">
-      <Navbar />
+      <Navbar onSearch={handleSearch} />
       <main className="flex-grow container mx-auto p-4">
-        <Notes />
+        <Notes searchQuery={searchQuery} />
       </main>
     </div>
   );
